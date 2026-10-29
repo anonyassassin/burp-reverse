@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReqLab (Burp Reverse)
 
-## Getting Started
+A lightweight, modern HTTP inspector built with Next.js, inspired by the workflow of Burp Suite's Repeater.
 
-First, run the development server:
+## The Challenge
+This project was built for the ACE Club Reverse Engineering Challenge. The goal was to take a closed-source application (Burp Suite), reverse-engineer one of its core features, rebuild it from scratch, and add a unique improvement.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## The Problem
+Burp Suite's Repeater is an industry standard for manual HTTP inspection. However, it requires users to manually eyeball responses for security misconfigurations and changes. Advanced diffing and automated security hints are locked behind Pro versions or third-party extensions.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The Solution
+ReqLab recreates the core Repeater workflow (modifying HTTP requests and inspecting raw responses) and improves it with:
+1. Automated Security Hints: Instantly flags missing security headers (CSP, HSTS, X-Frame-Options).
+2. Built-in Response Diffing: Automatically compares the current response against the previous one and highlights exact line-by-line changes.
+3. Reflection Check: Alerts the user if input payloads are reflected directly in the response body (a potential XSS surface).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+- Framework: Next.js 14 (App Router)
+- Language: TypeScript
+- Styling: Vanilla CSS (Dark mode / Terminal aesthetic)
+- Backend Proxy: Next.js Server Routes (to bypass CORS and handle external API requests)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Run Locally
 
-## Learn More
+1. Clone the repository:
+   git clone https://github.com/YOUR_USERNAME/burp-reverse.git
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate into the directory:
+   cd burp-reverse
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Install dependencies:
+   npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Start the development server:
+   npm run dev
 
-## Deploy on Vercel
+5. Open http://localhost:3000 in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How to Test
+1. Send a GET request to https://jsonplaceholder.typicode.com/posts/1
+2. Change the method to POST and add a JSON payload: {"title":"reqLab","body":"hello"}
+3. Click Send.
+4. Watch the Hints panel flag missing security headers.
+5. Watch the Diff vs Previous panel automatically highlight the differences between your GET and POST requests.
