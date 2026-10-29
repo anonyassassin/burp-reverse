@@ -23,7 +23,7 @@ ReqLab recreates the core Repeater workflow (modifying HTTP requests and inspect
 ## How to Run Locally
 
 1. Clone the repository:
-   git clone https://github.com/YOUR_USERNAME/burp-reverse.git
+   git clone https://github.com/anonyassassin/burp-reverse.git
 
 2. Navigate into the directory:
    cd burp-reverse
@@ -37,8 +37,8 @@ ReqLab recreates the core Repeater workflow (modifying HTTP requests and inspect
 5. Open http://localhost:3000 in your browser.
 
 ## How to Test
-1. Send a GET request to https://jsonplaceholder.typicode.com/posts/1
-2. Change the method to POST and add a JSON payload: {"title":"reqLab","body":"hello"}
+1. Send a GET request to https://jsonplaceholder.typicode.com/posts/1 (or any site)
+2. Change the method to POST and add a JSON payload: {"title":"reqLab","body":"hello"} (you can also add your custom payload)
 3. Click Send.
 4. Watch the Hints panel flag missing security headers.
 5. Watch the Diff vs Previous panel automatically highlight the differences between your GET and POST requests.
